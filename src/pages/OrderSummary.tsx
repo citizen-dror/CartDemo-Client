@@ -1,10 +1,13 @@
 import React from "react";
+import OrderSummary from "../components/OrderSummary";
 
-const OrderSummary: React.FC = () => {
-    return (
-        <div>
-            <h2>Order Summary Page</h2>
-        </div>
-    );
+const OrderSummaryPage: React.FC = () => {
+  return (
+    <div>
+      <h1>Order Summary Page</h1>
+      <OrderSummary />
+    </div>
+  );
 };
-export default OrderSummary;
+
+export default OrderSummaryPage;

@@ -1,4 +1,4 @@
-import { Item } from "../types/itemTypes";
+import { Item } from "../types/cartTypes";
 
 export const itemsMock: Item[] = [
   { id: "1", name: "Milk", category: "Dairy", price: 2.0 },

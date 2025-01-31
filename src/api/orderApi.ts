@@ -1,1 +1,1 @@
-export const submitOrder = async (orderData: any) => ({ success: true, orderId: "ORD123" });
+// export const submitOrder = async (orderData: any) => ({ success: true, orderId: "ORD123" });
