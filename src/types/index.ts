@@ -1,4 +1,4 @@
-export * from './product';
-export * from './productCategory';
-export * from './cartTypes';
-export * from './orderTypes';
+export type { Product } from './product';
+export type { ProductCategory } from './productCategory';
+export type { CartItem, Cart } from './cartTypes';
+export type { Order } from './orderTypes';

@@ -2,29 +2,37 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-
+import { Order, CartItem} from '../types';
+import { submitOrder } from '../api/orderApi';
 
 const OrderSummary: React.FC = () => {
   const cart = useSelector((state: RootState) => state.cart);
-  
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
   // Customer details state
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
-  const handleSubmit = () => {
-    // const order: Order = {
-    //   orderId: Date.now().toString(), // Unique order ID (you can replace this with actual logic)
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   address,
-    //   items: cart.items,
-    // };
-
-    // You can dispatch an action to save the order or send it to an API
-    //console.log("Order submitted:", order);
+  const handleSubmit = async () => {
+    try {
+        const items: CartItem[] = cartItems;
+        const order: Order = {
+            orderId: "0",
+            firstName,
+            lastName,
+            email,
+            address,
+            items,
+            version: 1, 
+        };
+        // Call the createOrder function from the API file
+        const result = await submitOrder(order);
+        console.log("Order submitted successfully:", result);
+    } catch (error) {
+      console.error("Error submitting order:", error);
+    }
   };
 
   return (
