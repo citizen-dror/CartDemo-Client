@@ -23,9 +23,9 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  margin: 5px 10px 5px 10px;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -36,13 +36,13 @@ h1 {
 }
 
 button {
+  color: white;              
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -63,6 +63,48 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #646cff;
   }
+}
+
+
+/* Input Field Styling */
+input {
+  width: 300px;           
+  padding: 10px;             /* Add padding */
+  font-size: 16px;           /* Set font size */
+  border: 1px solid #ccc;    /* Light gray border */
+  border-radius: 5px;        /* Rounded corners */
+  box-sizing: border-box;    /* Include padding and border in element's total width and height */
+  margin-bottom: 10px;       /* Space below input */
+}
+
+input:focus {
+  border-color: #3f51b5;      /* Blue border on focus */
+  outline: none;              /* Remove default outline */
+}
+
+
+/* Select Dropdown Styling */
+select {
+  width: 200px;               
+  padding: 10px;             /* Add padding */
+  font-size: 16px;           /* Set font size */
+  border: 1px solid #ccc;    /* Light gray border */
+  border-radius: 5px;        /* Rounded corners */
+  box-sizing: border-box;    /* Include padding and border in element's total width and height */
+  margin-bottom: 10px;       /* Space below select */
+}
+
+select:focus {
+  border-color: #3f51b5;      /* Blue border on focus */
+  outline: none;              /* Remove default outline */
+}
+
+/* Label Styling */
+label {
+  font-size: 14px;            /* Set font size */
+  font-weight: bold;          /* Bold text */
+  margin-bottom: 5px;         /* Space below label */
+  display: block;             /* Block-level element */
 }
