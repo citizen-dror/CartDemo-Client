@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Order } from "../types"; 
 
-const API_URL = "http://localhost:3000/orders";
+// Use the environment variable to get the base URL
+const API_URL = `${import.meta.env.VITE_API_ORDERS_BASE_URL}/orders`;
 
 // Function to create an order by sending a POST request to the API
 export const submitOrder = async (order: Order) => {
