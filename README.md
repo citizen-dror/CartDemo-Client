@@ -12,6 +12,6 @@ A **React application** for browsing items, adding them to a shopping cart, and 
 
 ### Related Repository  
 - Order service: [CartDemo-OrdersServer](https://github.com/citizen-dror/CartDemo-OrdersServer)
-- ProductsServer : [CartDemo-ProductsServer](https://github.com/citizen-dror/CartDemo-ProductsServer/)
+- Products Server : [CartDemo-ProductsServer](https://github.com/citizen-dror/CartDemo-ProductsServer/)
 
 
