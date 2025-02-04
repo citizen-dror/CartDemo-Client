@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
 import { Order } from "../types";
@@ -10,6 +10,9 @@ const OrderSummary: React.FC = () => {
     const dispatch = useDispatch();
     const cartItems = useSelector((state: RootState) => state.cart.items);
     const customer = useSelector((state: RootState) => state.customer);
+    
+    const [statusMessage, setStatusMessage] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const validateName = (value: string) => (value.length >= 2 ? "" : "Must be at least 2 characters");
     const validateAddress = (value: string) => (value.trim() !== "" ? "" : "Address is required");
@@ -25,7 +28,10 @@ const OrderSummary: React.FC = () => {
     };
 
     const handleSubmit = async () => {
-        if (!isFormValid) return;
+        if (!isFormValid || isSubmitting) return;
+
+        setIsSubmitting(true);
+        setStatusMessage(null);
 
         try {
             const order: Order = {
@@ -34,11 +40,13 @@ const OrderSummary: React.FC = () => {
                 items: cartItems,
                 version: 1,
             };
-            const result = await submitOrder(order);
-            console.log("Order submitted successfully:", result);
+            await submitOrder(order);
+            setStatusMessage("Order submitted successfully!");
         } catch (error) {
-            console.error("Error submitting order:", error);
+            setStatusMessage("Failed to submit order. Please try again.");
         }
+
+        setTimeout(() => setIsSubmitting(false), 3000); // Prevent resubmission for 3 seconds
     };
 
     return (
@@ -64,9 +72,22 @@ const OrderSummary: React.FC = () => {
                     </ul>
                 )}
                 <h3>Total: ${cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)}</h3>
-                <button onClick={handleSubmit} disabled={!isFormValid} style={{ background: isFormValid ? "#007bff" : "#ccc", color: "white", padding: "10px", border: "none", cursor: isFormValid ? "pointer" : "not-allowed" }}>
-                    Submit Order
+
+                <button 
+                    onClick={handleSubmit} 
+                    disabled={!isFormValid || isSubmitting}
+                    style={{ 
+                        background: isFormValid && !isSubmitting ? "#007bff" : "#ccc", 
+                        color: "white", 
+                        padding: "10px", 
+                        border: "none", 
+                        cursor: isFormValid && !isSubmitting ? "pointer" : "not-allowed" 
+                    }}
+                >
+                    {isSubmitting ? "Submitting..." : "Submit Order"}
                 </button>
+
+                {statusMessage && <p style={{ marginTop: "10px", color: statusMessage.includes("failed") ? "red" : "green" }}>{statusMessage}</p>}
             </div>
         </div>
     );
